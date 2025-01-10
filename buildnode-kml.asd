@@ -2,6 +2,7 @@
 
 (defsystem :buildnode-kml
   :description "Tool for building up an xml dom of an KML."
+  :licence "BSD-3-Clause"
   :components
   ((:module :src
     :serial T

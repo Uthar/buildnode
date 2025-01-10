@@ -2,6 +2,7 @@
 
 (defsystem :buildnode-html5
   :description "Tool for building up an xml dom of an html5 document"
+  :licence "BSD-3-Clause"
   :components
   ((:module :src
     :serial T

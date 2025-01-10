@@ -5,6 +5,7 @@
   Uses this XML format:
   http://msdn.microsoft.com/en-us/library/aa140066%28office.10%29.aspx
   "
+  :licence "BSD-3-Clause"
   :components
   ((:module :src
     :serial T

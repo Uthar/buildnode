@@ -3,7 +3,7 @@
 (defsystem :buildnode
   :description "Tool for building up an xml dom nicely."
   :author "http://www.acceleration.net"
-  :licence "BSD"
+  :licence "BSD-3-Clause"
   :components
   ((:module :src
     :serial T
@@ -34,7 +34,7 @@
 (defsystem :buildnode/test
   :description ":buildnode/test: tests for buildnode library of code"
   :author "http://www.acceleration.net"
-  :licence "BSD"
+  :licence "BSD-3-Clause"
   :components
   ((:module :tests
     :serial t

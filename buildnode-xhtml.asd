@@ -2,6 +2,7 @@
 
 (defsystem :buildnode-xhtml
   :description "Tool for building up an xml dom of an excel spreadsheet nicely."
+  :licence "BSD-3-Clause"
   :components
   ((:module :src
     :serial T
