@@ -1,4 +1,4 @@
-# Buildnode: A libary to ease interaction with cxml:dom documents and nodes
+# Buildnode: A library to ease interaction with cxml:dom documents and nodes
 
 ## Examples 
 

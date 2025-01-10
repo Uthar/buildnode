@@ -1,55 +1,48 @@
 ;; -*- lisp -*-
 
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (unless (find-package :net.acceleration.buildnode.system)
-    (defpackage :net.acceleration.buildnode.system
-	(:use :common-lisp :asdf))))
-
-(in-package :net.acceleration.buildnode.system)
-
 (defsystem :buildnode
   :description "Tool for building up an xml dom nicely."
   :author "http://www.acceleration.net"
   :licence "BSD"
   :components
   ((:module :src
-	    :serial T
-	    :components
-	    ((:file "packages")
-	     ;; should be removed once a patch doing the same thing makes its
-	     ;; way upstream
-	     (:file "dom-walker")
-	     (:file "buildnode")
-	     (:module :tags
-		      :serial T
-		      :components ((:file "tags" ))))))
-  :depends-on (:cxml :alexandria
-               :iterate :flexi-streams :split-sequence
-		     :swank ;; for setting tag-indentation
-		     :cl-interpol
-                     :collectors
-		     ;; TODO:
-		     ;; for html-generation - probably not a dependancy of the whole library
-		     :closure-html
-                     :cl-ppcre
-                     :symbol-munger
-		     ))
+    :serial T
+    :components
+    ((:file "packages")
+     ;; should be removed once a patch doing the same thing makes its
+     ;; way upstream
+     (:file "dom-walker")
+     (:file "buildnode")
+     (:module :tags
+      :serial T
+      :components ((:file "tags" ))))))
+  :depends-on (:cxml
+               :alexandria
+               :iterate
+               :flexi-streams
+               :split-sequence
+               :swank ;; for setting tag-indentation
+               :cl-interpol
+               :collectors
+               ;; TODO:
+               ;; for html-generation - probably not a dependancy of the whole library
+               :closure-html
+               :cl-ppcre
+               :symbol-munger)
+  :in-order-to ((test-op (test-op :buildnode/test))))
 
-(defsystem :buildnode-test
-  :description ":buildnode-test: tests for buildnode library of code"
+(defsystem :buildnode/test
+  :description ":buildnode/test: tests for buildnode library of code"
   :author "http://www.acceleration.net"
   :licence "BSD"
   :components
   ((:module :tests
-	    :serial t
-	    :components ((:file "setup")
-			 (:file "basic-tests"))))
-  :depends-on (:buildnode :buildnode-xhtml :lisp-unit2))
-
-(defmethod asdf:perform ((o asdf:test-op) (c (eql (find-system :buildnode))))
-  (asdf:load-system :buildnode-test)
-  (let ((*package* (find-package :buildnode-test)))
-    (eval (read-from-string "(run-tests)"))))
+    :serial t
+    :components ((:file "setup")
+                 (:file "basic-tests"))))
+  :depends-on (:buildnode :buildnode-xhtml :lisp-unit2)
+  :perform (test-op (o c)
+             (symbol-call :buildnode-test :run-tests)))
 
 ;; Copyright (c) 2011 Russ Tyndall , Acceleration.net http://www.acceleration.net
 ;; All rights reserved.
